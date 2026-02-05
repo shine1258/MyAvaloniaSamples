@@ -21,6 +21,18 @@
             ItemsSource="{Binding Sections}"
             SelectedItem="{Binding CurrentSection}"
             SelectionMode="AlwaysSelected">
+            <ListBox.Styles>
+                <Style Selector="ListBoxItem">
+                    <Setter Property="Interaction.Behaviors">
+                        <BehaviorCollectionTemplate>
+                            <BehaviorCollection>
+                                <ExecuteCommandOnTappedBehavior Command="{Binding $parent[UserControl].((vms:SectionNavigatorViewModel)DataContext).SectionTappedCommand}" CommandParameter="{Binding}" />
+                            </BehaviorCollection>
+                        </BehaviorCollectionTemplate>
+                    </Setter>
+                </Style>
+            </ListBox.Styles>
+
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Title}" />
@@ -29,18 +41,24 @@
         </ListBox>
 
         <!--  右侧  -->
-        <ScrollViewer
-            x:Name="Scroll"
-            PropertyChanged="Scroll_PropertyChanged"
-            VerticalScrollBarVisibility="Auto">
-            <ItemsControl x:Name="Items" ItemsSource="{Binding Sections}">
+        <ScrollViewer x:Name="ScrollViewer" PropertyChanged="Scroll_OnPropertyChanged">
+            <ItemsControl
+                x:Name="ItemsControl"
+                Margin="12,0,12,12"
+                ItemsSource="{Binding Sections}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Spacing="12" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Expander
                             Name="Expander"
                             HorizontalAlignment="Stretch"
                             Header="{Binding Title}"
-                            IsExpanded="{Binding IsExpanded}">
+                            IsExpanded="True">
                             <Border Height="600" Margin="8">
                                 <TextBlock
                                     HorizontalAlignment="Center"

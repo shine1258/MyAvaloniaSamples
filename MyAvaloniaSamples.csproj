@@ -28,5 +28,6 @@
       <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageReference Include="Xaml.Behaviors" Version="11.3.9.3" />
   </ItemGroup>
 </Project>

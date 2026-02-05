@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Threading;
 using Avalonia.VisualTree;
@@ -12,7 +11,7 @@ public partial class SectionNavigatorView : UserControl
     public SectionNavigatorView()
     {
         InitializeComponent();
-        Loaded += (_, _) => Vm.PropertyChanged += Vm_PropertyChanged;
+        Loaded += (_, _) => Vm.ScrollToSectionRequested += Vm_OnScrollToSectionRequested;
     }
 
     // 避免循环触发事件
@@ -20,37 +19,31 @@ public partial class SectionNavigatorView : UserControl
     private bool _selectionFromScroll;
     private SectionNavigatorViewModel Vm => (SectionNavigatorViewModel)DataContext!;
 
-    private void Vm_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+    private void Vm_OnScrollToSectionRequested(object? sender, SectionViewModel section)
     {
-        if (
-            e.PropertyName == nameof(SectionNavigatorViewModel.CurrentSection)
-            && !_selectionFromScroll
-        )
-        {
-            ScrollToCurrentSection();
-        }
-    }
-
-    private void ScrollToCurrentSection()
-    {
-        if (_scrollFromVm || Vm.CurrentSection == null)
+        if (_selectionFromScroll)
             return;
 
+        ScrollToCurrentSection(section);
+    }
+
+    private void ScrollToCurrentSection(SectionViewModel section)
+    {
         _scrollFromVm = true;
 
-        var index = Vm.Sections.IndexOf(Vm.CurrentSection);
+        var index = Vm.Sections.IndexOf(section);
         if (index < 0)
             return;
 
-        if (Items.ContainerFromIndex(index) is { } container)
-            container.BringIntoView(Scroll.Bounds);
+        if (ItemsControl.ContainerFromIndex(index) is { } container)
+            container.BringIntoView(ScrollViewer.Bounds);
 
         _scrollFromVm = false;
     }
 
-    private void Scroll_PropertyChanged(object? sender, AvaloniaPropertyChangedEventArgs e)
+    private void Scroll_OnPropertyChanged(object? sender, AvaloniaPropertyChangedEventArgs e)
     {
-        if (e.Property != ScrollViewer.OffsetProperty || _scrollFromVm)
+        if (_scrollFromVm || e.Property != ScrollViewer.OffsetProperty)
             return;
 
         // 需要将 UpdateCurrentSection 方法 Post 到 UIThread 中
@@ -61,13 +54,13 @@ public partial class SectionNavigatorView : UserControl
     private void UpdateCurrentSection()
     {
         SectionViewModel? current = null;
-        for (var i = 0; i < Items.ItemCount; i++)
+        for (var i = 0; i < ItemsControl.ItemCount; i++)
         {
-            if (Items.ContainerFromIndex(i) is not { } container)
+            if (ItemsControl.ContainerFromIndex(i) is not { } container)
                 continue;
 
             var expander = container.FindDescendantOfType<Expander>();
-            var p = expander?.TranslatePoint(new Point(0, 0), Scroll);
+            var p = expander?.TranslatePoint(new Point(0, 0), ScrollViewer);
             if (!p.HasValue)
                 continue;
 

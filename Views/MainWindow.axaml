@@ -12,7 +12,11 @@
     x:DataType="vms:MainViewModel"
     Icon="/Assets/avalonia-logo.ico"
     mc:Ignorable="d">
-    <TabControl>
+    <Design.DataContext>
+        <vms:MainViewModel />
+    </Design.DataContext>
+
+    <TabControl Padding="0">
         <TabItem Header="SectionNavigator">
             <vs:SectionNavigatorView DataContext="{Binding SectionNavigatorViewModel}" />
         </TabItem>
