@@ -1,0 +1,60 @@
+﻿<UserControl
+    x:Class="MyAvaloniaSamples.Views.SectionNavigatorView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vms="using:StickyHeader.ViewModels"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:DataType="vms:SectionNavigatorViewModel"
+    mc:Ignorable="d">
+    <Design.DataContext>
+        <vms:SectionNavigatorViewModel />
+    </Design.DataContext>
+
+    <DockPanel>
+        <!--  左侧菜单  -->
+        <ListBox
+            Width="220"
+            DockPanel.Dock="Left"
+            ItemsSource="{Binding Sections}"
+            SelectedItem="{Binding CurrentSection}"
+            SelectionMode="AlwaysSelected">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Title}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <!--  右侧  -->
+        <ScrollViewer
+            x:Name="Scroll"
+            PropertyChanged="Scroll_PropertyChanged"
+            VerticalScrollBarVisibility="Auto">
+            <ItemsControl x:Name="Items" ItemsSource="{Binding Sections}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Expander
+                            Name="Expander"
+                            HorizontalAlignment="Stretch"
+                            Header="{Binding Title}"
+                            IsExpanded="{Binding IsExpanded}">
+                            <Border Height="600" Margin="8">
+                                <TextBlock
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    TextAlignment="Center">
+                                    <Run Text="展示如何实现左侧菜单点击项目时, 右侧自动滚动到对于区域" />
+                                    <LineBreak />
+                                    <Run Text="同时也支持右侧滚动时, 左侧菜单自动切换到对应项" />
+                                </TextBlock>
+                            </Border>
+                        </Expander>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </DockPanel>
+</UserControl>

@@ -1,0 +1,20 @@
+<Window
+    x:Class="StickyHeader.Views.MainWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vms="using:StickyHeader.ViewModels"
+    xmlns:vs="using:MyAvaloniaSamples.Views"
+    Title="MyAvaloniaSamples"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:DataType="vms:MainViewModel"
+    Icon="/Assets/avalonia-logo.ico"
+    mc:Ignorable="d">
+    <TabControl>
+        <TabItem Header="SectionNavigator">
+            <vs:SectionNavigatorView DataContext="{Binding SectionNavigatorViewModel}" />
+        </TabItem>
+    </TabControl>
+</Window>
