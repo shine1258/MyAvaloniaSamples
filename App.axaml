@@ -1,5 +1,5 @@
 <Application
-    x:Class="StickyHeader.App"
+    x:Class="MyAvaloniaSamples.App"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     RequestedThemeVariant="Default">

@@ -1,7 +1,7 @@
 ﻿using System;
 using Avalonia;
 
-namespace StickyHeader;
+namespace MyAvaloniaSamples;
 
 internal static class Program
 {

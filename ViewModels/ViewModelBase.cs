@@ -1,5 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace StickyHeader.ViewModels;
+namespace MyAvaloniaSamples.ViewModels;
 
 public abstract class ViewModelBase : ObservableObject;

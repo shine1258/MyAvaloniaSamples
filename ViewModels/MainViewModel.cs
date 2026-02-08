@@ -1,4 +1,4 @@
-﻿namespace StickyHeader.ViewModels;
+﻿namespace MyAvaloniaSamples.ViewModels;
 
 public class MainViewModel : ViewModelBase
 {

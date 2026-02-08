@@ -1,6 +1,6 @@
 using Avalonia.Controls;
 
-namespace StickyHeader.Views;
+namespace MyAvaloniaSamples.Views;
 
 public partial class MainWindow : Window
 {

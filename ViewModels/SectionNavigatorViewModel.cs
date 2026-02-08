@@ -2,7 +2,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
-namespace StickyHeader.ViewModels;
+namespace MyAvaloniaSamples.ViewModels;
 
 public partial class SectionNavigatorViewModel : ViewModelBase
 {

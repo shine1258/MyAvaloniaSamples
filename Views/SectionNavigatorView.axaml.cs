@@ -2,7 +2,7 @@
 using Avalonia.Controls;
 using Avalonia.Threading;
 using Avalonia.VisualTree;
-using StickyHeader.ViewModels;
+using MyAvaloniaSamples.ViewModels;
 
 namespace MyAvaloniaSamples.Views;
 

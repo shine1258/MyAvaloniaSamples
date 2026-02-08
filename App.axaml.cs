@@ -3,10 +3,10 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
-using StickyHeader.ViewModels;
-using StickyHeader.Views;
+using MyAvaloniaSamples.ViewModels;
+using MyAvaloniaSamples.Views;
 
-namespace StickyHeader;
+namespace MyAvaloniaSamples;
 
 public class App : Application
 {
