@@ -7,25 +7,15 @@ namespace StickyHeader.ViewModels;
 
 public partial class SectionNavigatorViewModel : ViewModelBase
 {
-    public event EventHandler<SectionViewModel>? ScrollToSectionRequested;
-    public ObservableCollection<SectionViewModel> Sections { get; } =
-    [new("A"), new("B"), new("C"), new("D"), new("E")];
+    public event EventHandler<int>? ScrollToSectionRequested;
+    public ObservableCollection<string> Sections { get; } = ["A", "B", "C", "D", "E"];
 
     [ObservableProperty]
-    public partial SectionViewModel? CurrentSection { get; set; }
+    public partial int SelectedSectionIndex { get; set; }
 
-    partial void OnCurrentSectionChanged(SectionViewModel? value)
-    {
-        if (value != null)
-            ScrollToSectionRequested?.Invoke(this, value);
-    }
+    partial void OnSelectedSectionIndexChanged(int value) =>
+        ScrollToSectionRequested?.Invoke(this, value);
 
     [RelayCommand]
-    private void OnSectionTapped(SectionViewModel section) =>
-        ScrollToSectionRequested?.Invoke(this, section);
-}
-
-public class SectionViewModel(string title) : ViewModelBase
-{
-    public string Title { get; } = title;
+    private void OnSectionTapped() => ScrollToSectionRequested?.Invoke(this, SelectedSectionIndex);
 }

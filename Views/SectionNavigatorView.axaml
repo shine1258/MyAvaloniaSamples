@@ -19,7 +19,7 @@
             Width="220"
             DockPanel.Dock="Left"
             ItemsSource="{Binding Sections}"
-            SelectedItem="{Binding CurrentSection}"
+            SelectedIndex="{Binding SelectedSectionIndex}"
             SelectionMode="AlwaysSelected">
             <ListBox.Styles>
                 <Style Selector="ListBoxItem">
@@ -35,7 +35,7 @@
 
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Title}" />
+                    <TextBlock Text="{Binding}" />
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
@@ -57,7 +57,7 @@
                         <Expander
                             Name="Expander"
                             HorizontalAlignment="Stretch"
-                            Header="{Binding Title}"
+                            Header="{Binding}"
                             IsExpanded="True">
                             <Border Height="600" Margin="8">
                                 <TextBlock

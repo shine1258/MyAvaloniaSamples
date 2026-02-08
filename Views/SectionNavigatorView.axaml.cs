@@ -19,22 +19,20 @@ public partial class SectionNavigatorView : UserControl
     private bool _selectionFromScroll;
     private SectionNavigatorViewModel Vm => (SectionNavigatorViewModel)DataContext!;
 
-    private void Vm_OnScrollToSectionRequested(object? sender, SectionViewModel section)
+    private void Vm_OnScrollToSectionRequested(object? sender, int index)
     {
         if (_selectionFromScroll)
             return;
 
-        ScrollToCurrentSection(section);
+        ScrollToCurrentSection(index);
     }
 
-    private void ScrollToCurrentSection(SectionViewModel section)
+    private void ScrollToCurrentSection(int index)
     {
-        _scrollFromVm = true;
-
-        var index = Vm.Sections.IndexOf(section);
         if (index < 0)
             return;
 
+        _scrollFromVm = true;
         if (ItemsControl.ContainerFromIndex(index) is { } container)
             container.BringIntoView(ScrollViewer.Bounds);
 
@@ -53,7 +51,7 @@ public partial class SectionNavigatorView : UserControl
 
     private void UpdateCurrentSection()
     {
-        SectionViewModel? current = null;
+        var index = -1;
         for (var i = 0; i < ItemsControl.ItemCount; i++)
         {
             if (ItemsControl.ContainerFromIndex(i) is not { } container)
@@ -61,19 +59,19 @@ public partial class SectionNavigatorView : UserControl
 
             var expander = container.FindDescendantOfType<Expander>();
             var p = expander?.TranslatePoint(new Point(0, 0), ScrollViewer);
-            if (!p.HasValue)
+            if (p == null)
                 continue;
 
             if (p.Value.Y <= 0)
-                current = (SectionViewModel)container.DataContext!;
+                index = i;
             else
                 break;
         }
 
-        if (current != null && Vm.CurrentSection != current)
+        if (index >= 0 && Vm.SelectedSectionIndex != index)
         {
             _selectionFromScroll = true;
-            Vm.CurrentSection = current;
+            Vm.SelectedSectionIndex = index;
             _selectionFromScroll = false;
         }
     }
