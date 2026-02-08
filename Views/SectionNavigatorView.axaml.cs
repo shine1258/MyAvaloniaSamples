@@ -2,38 +2,30 @@
 using Avalonia.Controls;
 using Avalonia.Threading;
 using Avalonia.VisualTree;
+using CommunityToolkit.Mvvm.Messaging;
 using MyAvaloniaSamples.ViewModels;
 
 namespace MyAvaloniaSamples.Views;
 
-public partial class SectionNavigatorView : UserControl
+public partial class SectionNavigatorView : UserControl, IRecipient<ScrollToSectionMessage>
 {
     public SectionNavigatorView()
     {
         InitializeComponent();
-        Loaded += (_, _) => Vm.ScrollToSectionRequested += Vm_OnScrollToSectionRequested;
+        WeakReferenceMessenger.Default.Register(this);
     }
 
     // 避免循环触发事件
     private bool _scrollFromVm;
     private bool _selectionFromScroll;
-    private SectionNavigatorViewModel Vm => (SectionNavigatorViewModel)DataContext!;
 
-    private void Vm_OnScrollToSectionRequested(object? sender, int index)
+    public void Receive(ScrollToSectionMessage message)
     {
-        if (_selectionFromScroll)
-            return;
-
-        ScrollToCurrentSection(index);
-    }
-
-    private void ScrollToCurrentSection(int index)
-    {
-        if (index < 0)
+        if (_selectionFromScroll || message.SectionIndex < 0)
             return;
 
         _scrollFromVm = true;
-        if (ItemsControl.ContainerFromIndex(index) is { } container)
+        if (ItemsControl.ContainerFromIndex(message.SectionIndex) is { } container)
             container.BringIntoView(ScrollViewer.Bounds);
 
         _scrollFromVm = false;
@@ -68,10 +60,10 @@ public partial class SectionNavigatorView : UserControl
                 break;
         }
 
-        if (index >= 0 && Vm.SelectedSectionIndex != index)
+        if (index >= 0 && ListBox.SelectedIndex != index)
         {
             _selectionFromScroll = true;
-            Vm.SelectedSectionIndex = index;
+            WeakReferenceMessenger.Default.Send(new SelectSectionMessage(index));
             _selectionFromScroll = false;
         }
     }

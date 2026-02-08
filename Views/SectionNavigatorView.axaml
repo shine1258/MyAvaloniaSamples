@@ -17,6 +17,7 @@
         <!--  左侧菜单  -->
         <!--  不要将 SelectionMode 设为 AlwaysSelected, 参见 https://github.com/AvaloniaUI/Avalonia/issues/15891  -->
         <ListBox
+            Name="ListBox"
             Width="220"
             DockPanel.Dock="Left"
             ItemsSource="{Binding Sections}"
