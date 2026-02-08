@@ -1,0 +1,207 @@
+﻿<UserControl
+    x:Class="MyAvaloniaSamples.Views.ThemeSwitchView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sys="using:System"
+    xmlns:us="using:MyAvaloniaSamples.Utilities"
+    Background="{DynamicResource SystemRegionBrush}"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <sys:TimeSpan x:Key="Duration">0:0:0.4</sys:TimeSpan>
+    </UserControl.Resources>
+
+    <UserControl.Styles>
+        <Style Selector="ToggleButton.fancy /template/ Path.cloud">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Data" Value="m6.15937,30.80641c-12.75504,-5.62722 -3.75148,-23.63433 9.32526,-20.76713c2.67948,-13.7465 18.62328,-9.4323 20.87417,-4.55537c7.12782,-10.50415 21.38345,-4.12663 21.33,4.18023c8.3067,-8.30686 19.186,2.00972 15.9438,9.3787c9.057,-3.24236 14.8718,9.13753 7.55641,14.57718c3.93906,5.8148 -1.87574,17.25682 -13.93393,9.80745c0.80374,7.63694 -12.70159,14.38961 -22.64302,2.94759c-4.68935,8.06569 -23.07161,6.37752 -22.93748,-5.57362c-7.63709,6.51149 -18.70396,-1.74176 -15.5152,-9.99502l-0.00001,-0.00001z" />
+            <Setter Property="Fill" Value="White" />
+            <Setter Property="Transitions">
+                <Transitions>
+                    <ThicknessTransition
+                        Easing="CubicEaseInOut"
+                        Property="Margin"
+                        Duration="{StaticResource Duration}" />
+                </Transitions>
+            </Setter>
+
+            <Style Selector="^.cloud1">
+                <Setter Property="Opacity" Value="0.5" />
+                <Setter Property="Margin" Value="-55,20,0,0" />
+            </Style>
+
+            <Style Selector="^.cloud2">
+                <Setter Property="Margin" Value="-70,30,0,0" />
+            </Style>
+
+            <Style Selector="^.cloud3">
+                <Setter Property="Opacity" Value="0.5" />
+                <Setter Property="Margin" Value="0,10,-55,0" />
+                <Setter Property="RenderTransform" Value="scaleX(-1)" />
+            </Style>
+
+            <Style Selector="^.cloud4">
+                <Setter Property="Margin" Value="0,30,-80,0" />
+                <Setter Property="RenderTransform" Value="scaleX(-1)" />
+            </Style>
+        </Style>
+
+        <Style Selector="ToggleButton.fancy:checked /template/ Path.cloud">
+            <Style Selector="^.cloud1">
+                <Setter Property="Margin" Value="-155,20,0,0" />
+            </Style>
+
+            <Style Selector="^.cloud2">
+                <Setter Property="Margin" Value="-270,30,0,0" />
+            </Style>
+
+            <Style Selector="^.cloud3">
+                <Setter Property="Margin" Value="0,10,-255,0" />
+            </Style>
+
+            <Style Selector="^.cloud4">
+                <Setter Property="Margin" Value="0,30,-280,0" />
+            </Style>
+        </Style>
+
+        <Style Selector="ToggleButton.fancy /template/ Canvas.stars">
+            <Setter Property="Margin" Value="0,40,0,0" />
+            <Setter Property="Opacity" Value="0" />
+            <Setter Property="Transitions">
+                <Transitions>
+                    <DoubleTransition Property="Opacity" Duration="{StaticResource Duration}" />
+                    <ThicknessTransition
+                        Easing="CubicEaseInOut"
+                        Property="Margin"
+                        Duration="{StaticResource Duration}" />
+                </Transitions>
+            </Setter>
+        </Style>
+
+        <Style Selector="ToggleButton.fancy:checked /template/ Canvas.stars">
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="Opacity" Value="1" />
+        </Style>
+
+        <Style Selector="ToggleButton.fancy /template/ Canvas.stars Ellipse">
+            <Setter Property="Width" Value="1.5" />
+            <Setter Property="Height" Value="1.5" />
+            <Setter Property="Fill" Value="White" />
+        </Style>
+
+        <Style Selector="ToggleButton.fancy /template/ Ellipse.planet">
+            <Setter Property="Width" Value="42" />
+            <Setter Property="Height" Value="42" />
+            <Setter Property="RenderTransform" Value="translateX(-40px)" />
+            <Setter Property="Fill" Value="#FFFFA34C" />
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Fill" Duration="{StaticResource Duration}" />
+                    <TransformOperationsTransition
+                        Easing="CubicEaseInOut"
+                        Property="RenderTransform"
+                        Duration="{StaticResource Duration}" />
+                </Transitions>
+            </Setter>
+        </Style>
+
+        <Style Selector="ToggleButton.fancy:checked /template/ Ellipse.planet">
+            <Setter Property="RenderTransform" Value="translateX(40px)" />
+            <Setter Property="Fill" Value="#FFE5B91A" />
+        </Style>
+
+        <Style Selector="ToggleButton.fancy">
+            <Setter Property="Width" Value="130" />
+            <Setter Property="Height" Value="50" />
+            <Setter Property="Background" Value="#FF8CBCFA" />
+            <Setter Property="Transitions">
+                <Transitions>
+                    <BrushTransition Property="Background" Duration="{StaticResource Duration}" />
+                </Transitions>
+            </Setter>
+
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        ClipToBounds="True"
+                        CornerRadius="25">
+                        <Panel>
+                            <Canvas Classes="stars">
+                                <Ellipse Canvas.Left="50" Canvas.Top="30" />
+                                <Ellipse Canvas.Left="70" Canvas.Top="20" />
+                                <Ellipse Canvas.Left="20" Canvas.Top="15" />
+                                <Ellipse Canvas.Left="85" Canvas.Top="24" />
+                                <Ellipse Canvas.Left="44" Canvas.Top="37" />
+                                <Ellipse Canvas.Left="42" Canvas.Top="13" />
+                                <Ellipse Canvas.Left="74" Canvas.Top="40" />
+                                <Ellipse
+                                    Canvas.Left="14"
+                                    Canvas.Top="38"
+                                    Opacity="0.3" />
+
+                                <Ellipse
+                                    Canvas.Left="26"
+                                    Canvas.Top="43"
+                                    Opacity="0.3" />
+
+                                <Ellipse
+                                    Canvas.Left="29"
+                                    Canvas.Top="29"
+                                    Opacity="0.3" />
+
+                                <Ellipse
+                                    Canvas.Left="66"
+                                    Canvas.Top="12"
+                                    Opacity="0.3" />
+
+                                <Ellipse
+                                    Canvas.Left="84"
+                                    Canvas.Top="20"
+                                    Opacity="0.3" />
+
+                                <Ellipse
+                                    Canvas.Left="94"
+                                    Canvas.Top="30"
+                                    Opacity="0.3" />
+                            </Canvas>
+
+                            <Path Classes="cloud cloud1" />
+                            <Path Classes="cloud cloud2" />
+                            <Path Classes="cloud cloud3" />
+                            <Path Classes="cloud cloud4" />
+                            <Ellipse Classes="planet" />
+                        </Panel>
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+
+            <Style Selector="^:checked">
+                <Setter Property="Background" Value="#FF191C25" />
+            </Style>
+        </Style>
+    </UserControl.Styles>
+
+    <UserControl.Transitions>
+        <Transitions>
+            <BrushTransition Property="Background" Duration="{StaticResource Duration}" />
+        </Transitions>
+    </UserControl.Transitions>
+
+    <StackPanel Spacing="12">
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+            <TextBlock VerticalAlignment="Center" Text="参照: " />
+            <HyperlinkButton
+                Command="{x:Static us:GoToSiteCommand.Default}"
+                CommandParameter="{Binding $self.Content}"
+                Content="https://github.com/BYJRK/XamlClock" />
+        </StackPanel>
+
+        <ToggleButton
+            Name="ThemeSwitch"
+            HorizontalAlignment="Center"
+            Classes="fancy"
+            IsCheckedChanged="ThemeSwitch_OnIsCheckedChanged" />
+    </StackPanel>
+</UserControl>
