@@ -32,12 +32,6 @@
                     </Setter>
                 </Style>
             </ListBox.Styles>
-
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding}" />
-                </DataTemplate>
-            </ListBox.ItemTemplate>
         </ListBox>
 
         <!--  右侧  -->
