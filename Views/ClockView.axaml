@@ -4,9 +4,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:us="using:MyAvaloniaSamples.Utilities"
     xmlns:vms="using:MyAvaloniaSamples.ViewModels"
     x:DataType="vms:ClockViewModel"
-    Background="Black"
     mc:Ignorable="d">
     <Design.DataContext>
         <vms:ClockViewModel />
@@ -14,13 +14,9 @@
 
     <StackPanel Spacing="12">
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-            <TextBlock
-                VerticalAlignment="Center"
-                Foreground="White"
-                Text="参考实现: " />
-
+            <TextBlock VerticalAlignment="Center" Text="参照: " />
             <HyperlinkButton
-                Command="{Binding GoToReferenceImplementationSiteCommand}"
+                Command="{x:Static us:GoToSiteCommand.Default}"
                 CommandParameter="{Binding $self.Content}"
                 Content="https://github.com/BYJRK/XamlClock" />
         </StackPanel>

@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Linq;
 using Avalonia.Threading;
-using CommunityToolkit.Mvvm.Input;
 
 namespace MyAvaloniaSamples.ViewModels;
 
-public partial class ClockViewModel : ViewModelBase
+public class ClockViewModel : ViewModelBase
 {
     public ClockViewModel() =>
         DispatcherTimer.Run(
@@ -38,10 +36,6 @@ public partial class ClockViewModel : ViewModelBase
                 );
             })
             .ToArray();
-
-    [RelayCommand]
-    private void GoToReferenceImplementationSite(string url) =>
-        Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
 }
 
 public class TickViewModel(int number, double x, double y) : ViewModelBase
