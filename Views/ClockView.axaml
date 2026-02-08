@@ -1,0 +1,104 @@
+﻿<UserControl
+    x:Class="MyAvaloniaSamples.Views.ClockView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vms="using:MyAvaloniaSamples.ViewModels"
+    x:DataType="vms:ClockViewModel"
+    Background="Black"
+    mc:Ignorable="d">
+    <Design.DataContext>
+        <vms:ClockViewModel />
+    </Design.DataContext>
+
+    <StackPanel Spacing="12">
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+            <TextBlock
+                VerticalAlignment="Center"
+                Foreground="White"
+                Text="参考实现: " />
+
+            <HyperlinkButton
+                Command="{Binding GoToReferenceImplementationSiteCommand}"
+                CommandParameter="{Binding $self.Content}"
+                Content="https://github.com/BYJRK/XamlClock" />
+        </StackPanel>
+
+        <ThemeVariantScope RequestedThemeVariant="Light">
+            <Border
+                Width="600"
+                Height="600"
+                Background="White"
+                BorderBrush="#FF333333"
+                BorderThickness="15"
+                BoxShadow="10 10 10 0 DarkGray"
+                CornerRadius="300">
+                <Panel>
+                    <ItemsControl ItemsSource="{Binding Ticks}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <Panel />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate DataType="vms:TickViewModel">
+                                <TextBlock
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    FontSize="72"
+                                    Text="{Binding Number}">
+                                    <TextBlock.RenderTransform>
+                                        <TranslateTransform X="{Binding X}" Y="{Binding Y}" />
+                                    </TextBlock.RenderTransform>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <Rectangle
+                        Width="16"
+                        Height="180"
+                        Fill="Black">
+                        <Rectangle.RenderTransform>
+                            <TransformGroup>
+                                <TranslateTransform Y="-80" />
+                                <RotateTransform Angle="{Binding HourHandAngle}" />
+                            </TransformGroup>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+
+                    <Rectangle
+                        Width="10"
+                        Height="250"
+                        Fill="Black">
+                        <Rectangle.RenderTransform>
+                            <TransformGroup>
+                                <TranslateTransform Y="-110" />
+                                <RotateTransform Angle="{Binding MinuteHandAngle}" />
+                            </TransformGroup>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+
+                    <Rectangle
+                        Width="6"
+                        Height="290"
+                        Fill="Red">
+                        <Rectangle.RenderTransform>
+                            <TransformGroup>
+                                <TranslateTransform Y="-100" />
+                                <RotateTransform Angle="{Binding SecondHandAngle}" />
+                            </TransformGroup>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+
+                    <Ellipse
+                        Width="18"
+                        Height="18"
+                        Fill="Red" />
+                </Panel>
+            </Border>
+        </ThemeVariantScope>
+    </StackPanel>
+</UserControl>

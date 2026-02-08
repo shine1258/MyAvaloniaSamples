@@ -20,5 +20,9 @@
         <TabItem Header="SectionNavigator">
             <vs:SectionNavigatorView DataContext="{Binding SectionNavigatorViewModel}" />
         </TabItem>
+
+        <TabItem Header="Clock">
+            <vs:ClockView VerticalAlignment="Center" DataContext="{Binding ClockViewModel}" />
+        </TabItem>
     </TabControl>
 </Window>
