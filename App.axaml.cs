@@ -5,6 +5,8 @@ using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using MyAvaloniaSamples.ViewModels;
 using MyAvaloniaSamples.Views;
+using Projektanker.Icons.Avalonia;
+using Projektanker.Icons.Avalonia.FontAwesome;
 
 namespace MyAvaloniaSamples;
 
@@ -14,6 +16,7 @@ public class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
+        IconProvider.Current.Register<FontAwesomeIconProvider>();
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             // Avoid duplicate validations from both Avalonia and the CommunityToolkit.

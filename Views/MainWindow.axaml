@@ -28,5 +28,9 @@
         <TabItem Header="ThemeSwitch">
             <vs:ThemeSwitchView VerticalAlignment="Center" />
         </TabItem>
+
+        <TabItem Header="MagicNavigationBar">
+            <vs:MagicNavigationBarView VerticalAlignment="Center" />
+        </TabItem>
     </TabControl>
 </Window>

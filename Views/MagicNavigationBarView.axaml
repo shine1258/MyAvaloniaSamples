@@ -1,0 +1,28 @@
+﻿<UserControl
+    x:Class="MyAvaloniaSamples.Views.MagicNavigationBarView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cs="using:MyAvaloniaSamples.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:is="using:Projektanker.Icons.Avalonia"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:us="using:MyAvaloniaSamples.Utilities"
+    mc:Ignorable="d">
+    <StackPanel Spacing="12">
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+            <TextBlock VerticalAlignment="Center" Text="参照: " />
+            <HyperlinkButton
+                Command="{x:Static us:GoToSiteCommand.Default}"
+                CommandParameter="{Binding $self.Content}"
+                Content="https://github.com/JamesnetGroup/navigationbar" />
+        </StackPanel>
+
+        <cs:MagicNavigationBar>
+            <ListBoxItem is:Attached.Icon="fa-brands fa-microsoft" Content="Microsoft" />
+            <ListBoxItem is:Attached.Icon="fa-brands fa-apple" Content="Apple" />
+            <ListBoxItem is:Attached.Icon="fa-brands fa-google" Content="Google" />
+            <ListBoxItem is:Attached.Icon="fa-brands fa-facebook" Content="Facebook" />
+            <ListBoxItem is:Attached.Icon="fa-brands fa-instagram" Content="Instagram" />
+        </cs:MagicNavigationBar>
+    </StackPanel>
+</UserControl>

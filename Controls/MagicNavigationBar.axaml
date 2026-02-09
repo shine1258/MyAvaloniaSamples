@@ -1,0 +1,143 @@
+﻿<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cs="using:MyAvaloniaSamples.Controls"
+    xmlns:is="using:Projektanker.Icons.Avalonia"
+    xmlns:sys="using:System">
+    <Design.PreviewWith>
+        <cs:MagicNavigationBar SelectedIndex="0">
+            <ListBoxItem is:Attached.Icon="fa-brands fa-microsoft" Content="Microsoft" />
+            <ListBoxItem is:Attached.Icon="fa-brands fa-apple" Content="Apple" />
+            <ListBoxItem is:Attached.Icon="fa-brands fa-google" Content="Google" />
+            <ListBoxItem is:Attached.Icon="fa-brands fa-facebook" Content="Facebook" />
+            <ListBoxItem is:Attached.Icon="fa-brands fa-instagram" Content="Instagram" />
+        </cs:MagicNavigationBar>
+    </Design.PreviewWith>
+
+    <Style Selector="cs|MagicNavigationBar">
+        <Style.Resources>
+            <sys:TimeSpan x:Key="MagicNavigationBarAnimationDuration">0:0:0.5</sys:TimeSpan>
+        </Style.Resources>
+
+        <Setter Property="Width" Value="440" />
+        <Setter Property="Height" Value="120" />
+        <Setter Property="Background" Value="#FF222222" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Panel Background="{TemplateBinding Background}">
+                    <Border
+                        Margin="0,40,0,0"
+                        Background="#FFDDDDDD"
+                        CornerRadius="10" />
+
+                    <Canvas>
+                        <Panel
+                            Canvas.Left="{TemplateBinding SelectedIndex,
+                                                          Converter={x:Static cs:MagicNavigationBar.CircleCanvasLeftConverter}}"
+                            Width="80"
+                            Height="80"
+                            Margin="20,0"
+                            IsVisible="{TemplateBinding SelectedItem,
+                                                        Converter={x:Static ObjectConverters.IsNotNull}}">
+                            <Panel.Transitions>
+                                <Transitions>
+                                    <DoubleTransition
+                                        Easing="QuinticEaseInOut"
+                                        Property="Canvas.Left"
+                                        Duration="{StaticResource MagicNavigationBarAnimationDuration}" />
+                                </Transitions>
+                            </Panel.Transitions>
+
+                            <Path
+                                Width="100"
+                                Height="100"
+                                Margin="0,90,0,0"
+                                Data="M0,0 L100,0 C95.167503,0 91.135628,3.4278221 90.203163,7.9846497 L90.152122,8.2704506 89.963921,9.1416779 C85.813438,27.384438 69.496498,41 50,41 30.5035,41 14.186564,27.384438 10.036079,9.1416779 L9.8478823,8.2704926 9.7968359,7.9846497 C8.8643732,3.4278221 4.8324914,0 0,0 z"
+                                Fill="{TemplateBinding Background}" />
+
+                            <Ellipse Fill="{TemplateBinding Background}" />
+                            <Ellipse Margin="6" Fill="CadetBlue" />
+                        </Panel>
+                    </Canvas>
+
+                    <ItemsPresenter Margin="20,0">
+                        <ItemsPresenter.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="5" />
+                            </ItemsPanelTemplate>
+                        </ItemsPresenter.ItemsPanel>
+                    </ItemsPresenter>
+                </Panel>
+            </ControlTemplate>
+        </Setter>
+
+        <Setter Property="ItemContainerTheme">
+            <ControlTheme TargetType="ListBoxItem">
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="Template">
+                    <ControlTemplate>
+                        <Panel Margin="0,40,0,0" Background="{TemplateBinding Background}">
+                            <is:Icon
+                                Name="PART_Icon"
+                                FontSize="28"
+                                Value="{TemplateBinding is:Attached.Icon}">
+                                <is:Icon.Transitions>
+                                    <Transitions>
+                                        <ThicknessTransition
+                                            Easing="CubicEaseInOut"
+                                            Property="Margin"
+                                            Duration="{StaticResource MagicNavigationBarAnimationDuration}" />
+
+                                        <BrushTransition
+                                            Easing="CubicEaseInOut"
+                                            Property="Foreground"
+                                            Duration="{StaticResource MagicNavigationBarAnimationDuration}" />
+                                    </Transitions>
+                                </is:Icon.Transitions>
+                            </is:Icon>
+
+                            <TextBlock
+                                Name="PART_Name"
+                                HorizontalAlignment="Center"
+                                FontWeight="Bold"
+                                Text="{TemplateBinding Content}">
+                                <TextBlock.Transitions>
+                                    <Transitions>
+                                        <ThicknessTransition
+                                            Easing="CubicEaseInOut"
+                                            Property="Margin"
+                                            Duration="{StaticResource MagicNavigationBarAnimationDuration}" />
+
+                                        <BrushTransition
+                                            Easing="CubicEaseInOut"
+                                            Property="Foreground"
+                                            Duration="{StaticResource MagicNavigationBarAnimationDuration}" />
+                                    </Transitions>
+                                </TextBlock.Transitions>
+                            </TextBlock>
+                        </Panel>
+                    </ControlTemplate>
+                </Setter>
+            </ControlTheme>
+        </Setter>
+
+        <Style Selector="^ ListBoxItem /template/ is|Icon#PART_Icon">
+            <Setter Property="Foreground" Value="#44333333" />
+        </Style>
+
+        <Style Selector="^ ListBoxItem:selected /template/ is|Icon#PART_Icon">
+            <Setter Property="Margin" Value="0,-80,0,0" />
+            <Setter Property="Foreground" Value="#FF333333" />
+        </Style>
+
+        <Style Selector="^ ListBoxItem /template/ TextBlock#PART_Name">
+            <Setter Property="Margin" Value="0,60,0,0" />
+            <Setter Property="Foreground" Value="Transparent" />
+        </Style>
+
+        <Style Selector="^ ListBoxItem:selected /template/ TextBlock#PART_Name">
+            <Setter Property="Margin" Value="0,45,0,0" />
+            <Setter Property="Foreground" Value="#FF333333" />
+        </Style>
+    </Style>
+</Styles>
