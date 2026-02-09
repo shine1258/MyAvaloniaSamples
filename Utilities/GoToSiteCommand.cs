@@ -15,5 +15,5 @@ public class GoToSiteCommand : IRelayCommand
     public void Execute(object? parameter) =>
         Process.Start(new ProcessStartInfo(parameter?.ToString() ?? "") { UseShellExecute = true });
 
-    public void NotifyCanExecuteChanged() { }
+    public void NotifyCanExecuteChanged() => CanExecuteChanged?.Invoke(this, EventArgs.Empty);
 }
