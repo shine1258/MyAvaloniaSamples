@@ -4,7 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:cs="using:MyAvaloniaSamples.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:is="using:Projektanker.Icons.Avalonia"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:us="using:MyAvaloniaSamples.Utilities"
     mc:Ignorable="d">
@@ -18,11 +17,11 @@
         </StackPanel>
 
         <cs:MagicNavigationBar>
-            <ListBoxItem is:Attached.Icon="fa-brands fa-microsoft" Content="Microsoft" />
-            <ListBoxItem is:Attached.Icon="fa-brands fa-apple" Content="Apple" />
-            <ListBoxItem is:Attached.Icon="fa-brands fa-google" Content="Google" />
-            <ListBoxItem is:Attached.Icon="fa-brands fa-facebook" Content="Facebook" />
-            <ListBoxItem is:Attached.Icon="fa-brands fa-instagram" Content="Instagram" />
+            <ListBoxItem Tag="{StaticResource 'fa-brands fa-microsoft'}" Content="Microsoft" />
+            <ListBoxItem Tag="{StaticResource 'fa-brands fa-apple'}" Content="Apple" />
+            <ListBoxItem Tag="{StaticResource 'fa-brands fa-google'}" Content="Google" />
+            <ListBoxItem Tag="{StaticResource 'fa-brands fa-facebook'}" Content="Facebook" />
+            <ListBoxItem Tag="{StaticResource 'fa-brands fa-instagram'}" Content="Instagram" />
         </cs:MagicNavigationBar>
     </StackPanel>
 </UserControl>
