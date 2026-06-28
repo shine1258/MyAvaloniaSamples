@@ -60,11 +60,11 @@ public partial class SectionNavigatorView : UserControl, IRecipient<ScrollToSect
                 break;
         }
 
-        if (index >= 0 && ListBox.SelectedIndex != index)
-        {
-            _selectionFromScroll = true;
-            WeakReferenceMessenger.Default.Send(new SelectSectionMessage(index));
-            _selectionFromScroll = false;
-        }
+        if (index < 0 || ListBox.SelectedIndex == index)
+            return;
+
+        _selectionFromScroll = true;
+        WeakReferenceMessenger.Default.Send(new SelectSectionMessage(index));
+        _selectionFromScroll = false;
     }
 }

@@ -18,10 +18,10 @@ public class ClockViewModel : ViewModelBase
             TimeSpan.FromMilliseconds(500)
         );
 
-    public DateTime Now => DateTime.Now;
-    public double HourHandAngle => Now.Hour * 30 + Now.Minute / 60.0 * 30;
-    public double MinuteHandAngle => Now.Minute * 6 + Now.Second / 60.0 * 6;
-    public double SecondHandAngle => Now.Second * 6;
+    private static DateTime Now => DateTime.Now;
+    public static double HourHandAngle => Now.Hour * 30 + Now.Minute / 60.0 * 30;
+    public static double MinuteHandAngle => Now.Minute * 6 + Now.Second / 60.0 * 6;
+    public static double SecondHandAngle => Now.Second * 6;
     public TickViewModel[] Ticks { get; } =
         Enumerable
             .Range(1, 12)
