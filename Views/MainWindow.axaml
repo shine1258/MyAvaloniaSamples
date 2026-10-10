@@ -17,6 +17,13 @@
     <vms:MainViewModel />
   </Design.DataContext>
 
+  <Window.Transitions>
+    <Transitions>
+      <BrushTransition Property="Foreground" Duration="{StaticResource ThemeSwitchDuration}" />
+      <BrushTransition Property="Background" Duration="{StaticResource ThemeSwitchDuration}" />
+    </Transitions>
+  </Window.Transitions>
+
   <TabControl Padding="0">
     <TabItem Header="SectionNavigator">
       <vs:SectionNavigatorView DataContext="{Binding SectionNavigatorViewModel}" />
